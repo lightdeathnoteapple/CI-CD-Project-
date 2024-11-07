@@ -20,7 +20,7 @@ pipeline {
         }
         stage('code analysis') {
             steps {
-                withSonarQubeEnv('sonarqube') {
+                withSonarQubeEnv('sonar-server') {
                     sh '''$SCANNER_HOME/bin/sonar-scanner -Dsonar.projectName=Java-Springboot \
                           -Dsonar.java.binaries=. \
                           -Dsonar.projectKey=Java-Springboot'''
