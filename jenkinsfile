@@ -20,10 +20,18 @@ pipeline {
         }
         stage('code analysis') {
             steps {
-                withSonarQubeEnv('sonar-server') {
-                    sh '''$SCANNER_HOME/bin/sonar-scanner -Dsonar.projectName=Java-Springboot \
-                          -Dsonar.java.binaries=. \
-                          -Dsonar.projectKey=Java-Springboot'''
+                script {
+                    echo "SCANNER_HOME path: $SCANNER_HOME"
+                    withSonarQubeEnv('sonarqube') {  // Using 'sonarqube' as per your configuration
+                        sh '''
+                        $SCANNER_HOME/bin/sonar-scanner -X \
+                            -Dsonar.projectName=Java-Springboot \
+                            -Dsonar.java.binaries=. \
+                            -Dsonar.projectKey=Java-Springboot \
+                            -Dsonar.host.url=http://18.222.237.138:9000 \
+                            -Dsonar.login=sanjay-token
+                        '''
+                    }
                 }
             }
         }
