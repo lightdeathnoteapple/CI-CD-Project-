@@ -42,7 +42,7 @@ pipeline {
             steps {
                 script {
                     // Run the container in the background and expose port 8080
-                    sh 'docker run -itd -p 4567:8081 java-sample1'
+                    sh 'docker run -itd -p 4567:8081 java-sample'
                 }
             }
         }
