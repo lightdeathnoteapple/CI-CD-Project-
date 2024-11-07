@@ -2,6 +2,7 @@ def COLOR_MAP = [
     'SUCCESS': 'good',
     'FAILURE': 'danger'
 ]
+
 pipeline {
     agent any
     environment {
@@ -37,19 +38,14 @@ pipeline {
                 sh 'docker build -t spring-boot1 .'
             }
         }
-        stage('docker compose') {
-            steps {
-                sh 'docker-compose up -d'
-            }
-        }
     }
- 
+    
     post {
         always {
             echo 'Sending Slack notification...'
             slackSend channel: '#ci-cd',
-                      color: COLOR_MAP[currentBuild.currentResult],
-                      message: "*${currentBuild.currentResult}:* Job ${env.JOB_NAME} build ${env.BUILD_NUMBER} \n More info at: ${env.BUILD_URL}"
+                      color: COLOR_MAP[currentBuild.result] ?: 'gray', // Default to 'gray' if result is null
+                      message: "*${currentBuild.result}:* Job ${env.JOB_NAME} build ${env.BUILD_NUMBER} \n More info at: ${env.BUILD_URL}"
         }
     }
 }
