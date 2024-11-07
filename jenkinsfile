@@ -35,14 +35,14 @@ pipeline {
         }
         stage('docker build') {
             steps {
-                sh 'docker build -t spring-boot1 .'
+                sh 'docker build -t java-sample .'
             }
         }
         stage('docker run') {
             steps {
                 script {
                     // Run the container in the background and expose port 8080
-                    sh 'docker run -d -p 8088:8081 spring-boot1'
+                    sh 'docker run -itd -p 4567:8081 java-sample1'
                 }
             }
         }
