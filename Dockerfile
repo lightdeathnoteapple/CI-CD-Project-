@@ -1,6 +1,4 @@
 FROM openjdk:17-jdk-alpine
-WORKDIR /build
-COPY target/demo-0.0.1-SNAPSHOT.jar /build 
-ENTRYPOINT ["java", "-jar", "demo-0.0.1-SNAPSHOT.jar", "--server.port=8081"]
-EXPOSE 8081
-
+COPY target/demo-0.0.1-SNAPSHOT.jar app.jar
+EXPOSE 8091
+CMD ["java", "-jar", "app.jar", "--server.port=8091"] 
