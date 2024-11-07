@@ -42,7 +42,7 @@ pipeline {
             steps {
                 script {
                     // Run the container in the background and expose port 8080
-                    sh 'docker run -d -p 8081:8080 --name spring-boot-container spring-boot1'
+                    sh 'docker run -d -p 8081:8081 --name spring-boot-containe12 spring-boot1'
                 }
             }
         }
